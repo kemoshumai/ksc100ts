@@ -1,20 +1,23 @@
 import llvm from 'llvm-bindings';
+import { KSCBuilder } from './KSCBuilder';
 
 export class Compiler
 {
-    context: llvm.LLVMContext;
-    builder: llvm.IRBuilder;
+    builder: KSCBuilder;
 
-    constructor()
+    constructor(modulename: string)
     {
         const context = new llvm.LLVMContext();
         const builder = new llvm.IRBuilder(context);
-        this.context = context;
-        this.builder = builder;
+        const module = new llvm.Module(modulename, context);
+        this.builder = new KSCBuilder(context, builder, module);
     }
 
-    compile(modulename: string)
+    compile(): string
     {
-        const module = new llvm.Module(modulename, this.context);
+        const { builder } = this;
+        builder.create_entry_function();
+        builder.create_return();
+        return builder.print();
     }
 }
