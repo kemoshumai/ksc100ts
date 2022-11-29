@@ -1,15 +1,21 @@
 import llvm from "llvm-bindings";
+import crypto from 'crypto';
 
 export class KSCBuilder{
     context: llvm.LLVMContext;
     builder: llvm.IRBuilder;
     module: llvm.Module;
+    uniqueHash: string;
     
     constructor(context: llvm.LLVMContext, builder: llvm.IRBuilder, module: llvm.Module)
     {
+        const sha256 = crypto.createHash('sha256');
+        sha256.update(Math.random().toString(10));
+
         this.context = context;
         this.builder = builder;
         this.module = module;
+        this.uniqueHash = sha256.digest('hex');
     }
 
     CreateEntryFunction()
@@ -18,7 +24,7 @@ export class KSCBuilder{
 
         const returnType = builder.getInt32Ty();
         const functionType = llvm.FunctionType.get(returnType, [], false);
-        const func = llvm.Function.Create(functionType, llvm.Function.LinkageTypes.ExternalLinkage, 'main', module);
+        const func = llvm.Function.Create(functionType, llvm.Function.LinkageTypes.ExternalLinkage, this.makeManglingName("main"), module);
 
         const entryBB = llvm.BasicBlock.Create(context, 'entry', func);
         builder.SetInsertPoint(entryBB);
@@ -39,6 +45,12 @@ export class KSCBuilder{
     Print(): string
     {
         return this.module.print();
+    }
+
+
+    private makeManglingName(basename: string)
+    {
+        return `?${basename}@${this.module.getName()}<${this.uniqueHash}>`;
     }
 
 
