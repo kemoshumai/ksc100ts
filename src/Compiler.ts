@@ -1,4 +1,5 @@
 import llvm from 'llvm-bindings';
+import { ProgramNode } from './ASTs';
 import { KSCBuilder } from './KSCBuilder';
 
 export class Compiler
@@ -13,7 +14,7 @@ export class Compiler
         this.builder = new KSCBuilder(context, builder, module);
     }
 
-    compile(): string
+    compile(program: ProgramNode): string
     {
         const { builder } = this;
         builder.CreateEntryFunction();
