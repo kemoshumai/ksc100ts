@@ -9,10 +9,16 @@
 
 export enum KSCNodes{
     FunctionNode,
-    VariableDeclaration
+    VariableDeclarationNode,
+    ReturnNode,
+    IfExpressionNode,
+    ExpressionRefNode,
+    FunctionCallNode,
+    BinaryOperatorNode,
+    ConstantNumberLiteralExpression
 }
 
-export type ExpressionNode = FunctionNode | VariableDeclaration;
+export type ExpressionNode = FunctionNode | VariableDeclarationNode | ReturnNode | IfExpressionNode | ExpressionRefNode | FunctionCallNode | BinaryOperatorNode | ConstantNumberLiteralExpression;
 
 
 export interface ProgramNode{
@@ -35,7 +41,7 @@ export interface FunctionNode{
 }
 
 /// 変数(定数)宣言
-export interface VariableDeclaration{
+export interface VariableDeclarationNode{
     type: KSCNodes,
     vartype: string,
     name: string,
@@ -45,5 +51,60 @@ export interface VariableDeclaration{
     value: ExpressionNode | null
 }
 
-/// 
+/// return
+export interface ReturnNode{
+    type: KSCNodes,
+    value: ExpressionNode
+}
 
+/// if式
+export interface  IfExpressionNode{
+    type: KSCNodes,
+    condition: ExpressionNode,
+    then: ExpressionNode,
+    else: ExpressionNode
+}
+
+/// 値読み出し
+export interface ExpressionRefNode{
+    type: KSCNodes,
+    identifier: string
+}
+
+
+/// 関数呼び出し
+export interface FunctionCallNode{
+    type:KSCNodes,
+    target: string,
+    arguments: ExpressionNode[]
+}
+
+/// 二項演算子
+export interface BinaryOperatorNode{
+    type: KSCNodes,
+    op: BinaryOperatorEnum,
+    left: ExpressionNode,
+    right: ExpressionNode
+}
+
+
+/// 数値リテラル
+export interface ConstantNumberLiteralExpression{
+    type: KSCNodes,
+    value: number
+}
+
+export enum BinaryOperatorEnum{
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+    DIV_INT,
+    MOD,
+    EQUAL,
+    NOT_EQUAL,
+    GREATER_THAN,
+    GREATER_THAN_OR_EQUAL,
+    LESS_THAN,
+    LESS_THAN_OR_EQUAL
+}
