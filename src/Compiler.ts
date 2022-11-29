@@ -16,8 +16,8 @@ export class Compiler
     compile(): string
     {
         const { builder } = this;
-        builder.create_entry_function();
-        builder.create_return();
-        return builder.print();
+        builder.CreateEntryFunction();
+        builder.CreateReturn();
+        return builder.Print();
     }
 }

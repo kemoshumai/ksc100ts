@@ -12,7 +12,7 @@ export class KSCBuilder{
         this.module = module;
     }
 
-    create_entry_function()
+    CreateEntryFunction()
     {
         const {builder,context,module} = this;
 
@@ -31,12 +31,12 @@ export class KSCBuilder{
         }
     }
 
-    create_return()
+    CreateReturn()
     {
         this.builder.CreateRet(this.builder.getInt32(0));
     }
 
-    print(): string
+    Print(): string
     {
         return this.module.print();
     }
