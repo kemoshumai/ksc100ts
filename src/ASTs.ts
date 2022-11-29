@@ -7,16 +7,21 @@
 // [ソースコード] --構文解析--> [AST] --意味解析--> [IR]
 //                              ↑ここ
 
+export enum KSCNodes{
+    FunctionNode,
+    VariableDeclaration
+}
 
-type ExpressionNode = FunctionNode | VariableDeclaration;
+export type ExpressionNode = FunctionNode | VariableDeclaration;
 
 
-interface ProgramNode{
+export interface ProgramNode{
     expressions: ExpressionNode[]
 }
 
 /// 無名関数リテラル
-interface FunctionNode{
+export interface FunctionNode{
+    type: KSCNodes,
 
     // 返り値の型
     returnType: string,
@@ -30,8 +35,9 @@ interface FunctionNode{
 }
 
 /// 変数(定数)宣言
-interface VariableDeclaration{
-    type: string,
+export interface VariableDeclaration{
+    type: KSCNodes,
+    vartype: string,
     name: string,
     mutable: boolean,
 
