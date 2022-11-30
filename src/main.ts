@@ -1,5 +1,5 @@
 import {Compiler} from './Compiler';
-import {BinaryOperatorEnum, FunctionNode, KSCNodes, ProgramNode} from './ASTs';
+import {BinaryOperatorEnum, ProgramNode} from './ASTs';
 
 function main(): void {
 
