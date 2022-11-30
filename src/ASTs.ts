@@ -7,16 +7,6 @@
 // [ソースコード] --構文解析--> [AST] --意味解析--> [IR]
 //                              ↑ここ
 
-export enum KSCNodes{
-    FunctionNode,
-    VariableDeclarationNode,
-    ReturnNode,
-    IfExpressionNode,
-    ExpressionRefNode,
-    FunctionCallNode,
-    BinaryOperatorNode,
-    ConstantNumberLiteralExpression
-}
 
 export type ExpressionNode = FunctionNode | VariableDeclarationNode | ReturnNode | IfExpressionNode | ExpressionRefNode | FunctionCallNode | BinaryOperatorNode | ConstantNumberLiteralExpression;
 
@@ -27,7 +17,7 @@ export interface ProgramNode{
 
 /// 無名関数リテラル
 export interface FunctionNode{
-    type: KSCNodes,
+    type: "FunctionNode",
 
     // 返り値の型
     returnType: string,
@@ -42,7 +32,7 @@ export interface FunctionNode{
 
 /// 変数(定数)宣言
 export interface VariableDeclarationNode{
-    type: KSCNodes,
+    type: "VariableDeclarationNode",
     vartype: string,
     name: string,
     mutable: boolean,
@@ -53,13 +43,13 @@ export interface VariableDeclarationNode{
 
 /// return
 export interface ReturnNode{
-    type: KSCNodes,
+    type: "ReturnNode",
     value: ExpressionNode
 }
 
 /// if式
 export interface  IfExpressionNode{
-    type: KSCNodes,
+    type: "IfExpressionNode",
     condition: ExpressionNode,
     then: ExpressionNode,
     else: ExpressionNode
@@ -67,21 +57,21 @@ export interface  IfExpressionNode{
 
 /// 値読み出し
 export interface ExpressionRefNode{
-    type: KSCNodes,
+    type: "ExpressionRefNode",
     identifier: string
 }
 
 
 /// 関数呼び出し
 export interface FunctionCallNode{
-    type:KSCNodes,
+    type:"FunctionCallNode",
     target: string,
     arguments: ExpressionNode[]
 }
 
 /// 二項演算子
 export interface BinaryOperatorNode{
-    type: KSCNodes,
+    type: "BinaryOperatorNode",
     op: BinaryOperatorEnum,
     left: ExpressionNode,
     right: ExpressionNode
@@ -90,7 +80,7 @@ export interface BinaryOperatorNode{
 
 /// 数値リテラル
 export interface ConstantNumberLiteralExpression{
-    type: KSCNodes,
+    type: "ConstantNumberLiteralExpression",
     value: number
 }
 

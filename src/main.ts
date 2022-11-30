@@ -7,12 +7,12 @@ function main(): void {
     const program: ProgramNode = {
         expressions: [
             {
-                type: KSCNodes.VariableDeclarationNode,
+                type: "VariableDeclarationNode",
                 vartype: "Function",
                 name: "gcd",
                 mutable: false,
                 value: {
-                    type: KSCNodes.FunctionNode,
+                    type: "FunctionNode",
                     returnType: "Number",
                     paramTypes: [
                         {
@@ -26,42 +26,42 @@ function main(): void {
                     ],
                     content: [
                         {
-                            type: KSCNodes.ReturnNode,
+                            type: "ReturnNode",
                             value: {
-                                type: KSCNodes.IfExpressionNode,
+                                type: "IfExpressionNode",
                                 condition: {
-                                    type: KSCNodes.BinaryOperatorNode,
+                                    type: "BinaryOperatorNode",
                                     op: BinaryOperatorEnum.EQUAL,
                                     left: {
-                                        type: KSCNodes.ExpressionRefNode,
+                                        type: "ExpressionRefNode",
                                         identifier: "b"
                                     },
                                     right: {
-                                        type: KSCNodes.ConstantNumberLiteralExpression,
+                                        type: "ConstantNumberLiteralExpression",
                                         value: 0
                                     }
                                 },
                                 then: {
-                                    type: KSCNodes.ExpressionRefNode,
+                                    type: "ExpressionRefNode",
                                     identifier: "a"
                                 },
                                 else: {
-                                    type: KSCNodes.FunctionCallNode,
+                                    type: "FunctionCallNode",
                                     target: "gcd",
                                     arguments: [
                                         {
-                                            type: KSCNodes.ExpressionRefNode,
+                                            type: "ExpressionRefNode",
                                             identifier: "b"
                                         },
                                         {
-                                            type: KSCNodes.BinaryOperatorNode,
+                                            type: "BinaryOperatorNode",
                                             op: BinaryOperatorEnum.MOD,
                                             left: {
-                                                type: KSCNodes.ExpressionRefNode,
+                                                type: "ExpressionRefNode",
                                                 identifier: "a"
                                             },
                                             right: {
-                                                type: KSCNodes.ExpressionRefNode,
+                                                type: "ExpressionRefNode",
                                                 identifier: "b"
                                             }
                                         }
