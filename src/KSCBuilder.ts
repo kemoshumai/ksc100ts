@@ -18,7 +18,7 @@ export class KSCBuilder{
         this.uniqueHash = sha256.digest('hex');
     }
 
-    CreateEntryFunction()
+    CreateEntryFunction(): llvm.BasicBlock
     {
         const {builder,context,module} = this;
 
@@ -35,6 +35,13 @@ export class KSCBuilder{
         if (llvm.verifyModule(module)) {
             console.error('\u001b[31mVerifying module failed\u001b[0m');
         }
+
+        return entryBB;
+    }
+
+    SetCurrentBlock(block: llvm.BasicBlock)
+    {
+        this.builder.SetInsertPoint(block);
     }
 
     CreateReturn()
