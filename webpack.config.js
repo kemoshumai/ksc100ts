@@ -15,7 +15,7 @@ module.exports = {
     },
     plugins: [
         new webpack.ExternalsPlugin('commonjs', [
-            'llvm-bindings' 
+            'llvm-bindings','pino' 
         ]) 
     ],
     resolve: {
