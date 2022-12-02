@@ -1,11 +1,13 @@
 import llvm from 'llvm-bindings';
 import { ExpressionNode, ProgramNode } from './ASTs';
 import { KSCBuilder } from './KSCBuilder';
+import { KSCStack } from './KSCStack';
 import { logger } from './logger';
 
 export class Compiler
 {
     builder: KSCBuilder;
+    stack: KSCStack;
 
     constructor(modulename: string)
     {
@@ -13,6 +15,7 @@ export class Compiler
         const builder = new llvm.IRBuilder(context);
         const module = new llvm.Module(modulename, context);
         this.builder = new KSCBuilder(context, builder, module);
+        this.stack = new KSCStack();
     }
 
     compile(program: ProgramNode): string
@@ -40,8 +43,13 @@ export class Compiler
     {
         switch(expression.type)
         {
+            case 'VariableDeclarationNode':
+                const {vartype, name, mutable, value} = expression;
+
+                break;
             default:
                 logger.error(`Expression '${expression.type}' is not implemented so far.`)
+                break;
         }
     }
 }
