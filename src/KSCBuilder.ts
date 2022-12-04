@@ -7,10 +7,10 @@ export class KSCBuilder{
     module: llvm.Module;
     uniqueHash: string;
     
-    constructor(context: llvm.LLVMContext, builder: llvm.IRBuilder, module: llvm.Module)
+    constructor(context: llvm.LLVMContext, builder: llvm.IRBuilder, module: llvm.Module, hashSource: string = Math.random().toString(10))
     {
         const sha256 = crypto.createHash('sha256');
-        sha256.update(Math.random().toString(10));
+        sha256.update(hashSource);
 
         this.context = context;
         this.builder = builder;
