@@ -43,4 +43,18 @@ export class KSCStack
         }
         return null;
     }
+
+    getTypeFromLiteralTypeExpression(typename: string)
+    {
+        switch(typename)
+        {
+            //プリミティブ型
+            case "Number":
+            case "Bool":
+                return typename;
+            default:
+                //TODO: ユーザー定義型
+                throw Error("プリミティブ型以外を解決しようとしました。");
+        }
+    }
 }
