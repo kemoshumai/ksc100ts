@@ -5,6 +5,7 @@ export type KSCValue = NumberValue | BooleanValue;
 
 /// 数値型
 export class NumberValue{
+    type: "Number" = "Number";
     ref: llvm.Value;
     constructor(context: llvm.LLVMContext)
     {
@@ -38,6 +39,7 @@ export class NumberValue{
 
 // 真偽値型
 export class BooleanValue{
+    type: "Bool" = "Bool";
     ref: llvm.Value;
     constructor(context: llvm.LLVMContext)
     {
