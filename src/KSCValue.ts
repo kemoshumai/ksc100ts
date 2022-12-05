@@ -1,7 +1,8 @@
 import llvm from "llvm-bindings";
+import { KSCBuilder } from "./KSCBuilder";
 import { logger } from "./logger";
 
-export type KSCValue = NumberValue | BooleanValue;
+export type KSCValue = NumberValue | BooleanValue | VoidValue;
 
 /// 数値型
 export class NumberValue{
@@ -34,6 +35,13 @@ export class NumberValue{
             return false;
         this.ref = value;
         return true;
+    }
+
+    copy(builder: KSCBuilder): KSCValue
+    {
+        const copied = new NumberValue(builder.context);
+        copied.set(builder.context, builder.Copy(this.get()));
+        return copied;
     }
 }
 
@@ -69,5 +77,20 @@ export class BooleanValue{
         this.ref = value;
         return true;
     }
+
+    copy(builder: KSCBuilder): KSCValue
+    {
+        const copied = new BooleanValue(builder.context);
+        copied.set(builder.context, builder.Copy(this.get()));
+        return copied;
+    }
 }
 
+/// Void型
+export class VoidValue{
+    type: "Void" = "Void";
+    copy(): KSCValue
+    {
+        return new VoidValue();
+    }
+}

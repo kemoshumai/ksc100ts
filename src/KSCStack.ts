@@ -1,4 +1,5 @@
-import { KSCValue } from "./KSCValue";
+import llvm from "llvm-bindings";
+import { BooleanValue, KSCValue, NumberValue, VoidValue } from "./KSCValue";
 
 interface Variable{
     name: string,
@@ -51,10 +52,26 @@ export class KSCStack
             //プリミティブ型
             case "Number":
             case "Bool":
+            case "Void":
                 return typename;
             default:
                 //TODO: ユーザー定義型
                 throw Error("プリミティブ型以外を解決しようとしました。");
+        }
+    }
+
+    getKSCValueFromTypeName(typename: string, context: llvm.LLVMContext): KSCValue
+    {
+        switch(typename)
+        {
+            case "Number":
+                return new NumberValue(context);
+            case "Bool":
+                return new BooleanValue(context);
+            case "Void":
+                return new VoidValue();
+            default:
+                throw Error("その型を値にできないか、実装されていません。");
         }
     }
 }

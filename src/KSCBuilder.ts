@@ -39,6 +39,12 @@ export class KSCBuilder{
         return entryBB;
     }
 
+    Copy(source: llvm.Value): llvm.Value
+    {
+        const allocated = this.builder.CreateAlloca(source.getType());
+        return this.builder.CreateStore(allocated, source);
+    }
+
     SetCurrentBlock(block: llvm.BasicBlock)
     {
         this.builder.SetInsertPoint(block);
