@@ -52,7 +52,7 @@ export class Compiler
                     // もし代入元と代入先で型が違ったら
                     throw Error(`型${vartype}が期待されましたが${executedValue.type}が代入されようとしています。`);
                 }
-                this.stack.insertVariableIntoCurrentScope(name, executedValue);
+                this.stack.insertVariableIntoCurrentScope(name, executedValue, mutable);
                 return executedValue.copy(this.builder);
             default:
                 logger.error(`Expression '${expression.type}' is not implemented so far.`)

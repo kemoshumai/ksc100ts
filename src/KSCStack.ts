@@ -3,7 +3,8 @@ import { BooleanValue, KSCValue, NumberValue, VoidValue } from "./KSCValue";
 
 interface Variable{
     name: string,
-    value: KSCValue
+    value: KSCValue,
+    mutable: boolean
 }
 
 interface Scope{
@@ -20,9 +21,9 @@ export class KSCStack
         this.stack = [{name:"toplevel", variables: []}];
     }
 
-    insertVariableIntoCurrentScope(name: string, value: KSCValue)
+    insertVariableIntoCurrentScope(name: string, value: KSCValue, mutable = false)
     {
-        this.stack.at(-1)?.variables.push({name,value})
+        this.stack.at(-1)?.variables.push({name,value,mutable})
     }
 
     makeNewScope(scopename: string)
