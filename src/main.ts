@@ -8,68 +8,12 @@ function main(): void {
         expressions: [
             {
                 type: "VariableDeclarationNode",
-                vartype: "Function",
-                name: "gcd",
+                vartype: "Number",
+                name: "hoge",
                 mutable: false,
                 value: {
-                    type: "FunctionNode",
-                    returnType: "Number",
-                    paramTypes: [
-                        {
-                            name: "a",
-                            type: "Number"
-                        },
-                        {
-                            name: "b",
-                            type: "Number"
-                        }
-                    ],
-                    content: [
-                        {
-                            type: "ReturnNode",
-                            value: {
-                                type: "IfExpressionNode",
-                                condition: {
-                                    type: "BinaryOperatorNode",
-                                    op: BinaryOperatorEnum.EQUAL,
-                                    left: {
-                                        type: "ExpressionRefNode",
-                                        identifier: "b"
-                                    },
-                                    right: {
-                                        type: "ConstantNumberLiteralExpression",
-                                        value: 0
-                                    }
-                                },
-                                then: {
-                                    type: "ExpressionRefNode",
-                                    identifier: "a"
-                                },
-                                else: {
-                                    type: "FunctionCallNode",
-                                    target: "gcd",
-                                    arguments: [
-                                        {
-                                            type: "ExpressionRefNode",
-                                            identifier: "b"
-                                        },
-                                        {
-                                            type: "BinaryOperatorNode",
-                                            op: BinaryOperatorEnum.MOD,
-                                            left: {
-                                                type: "ExpressionRefNode",
-                                                identifier: "a"
-                                            },
-                                            right: {
-                                                type: "ExpressionRefNode",
-                                                identifier: "b"
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
+                    type: "ConstantNumberLiteralExpression",
+                    value: 123
                 }
             }
         ]
